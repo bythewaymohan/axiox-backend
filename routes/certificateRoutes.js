@@ -2,11 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const Certificate = require('../models/Certificate');
+const { authMiddleware } = require("../middlewares/authMiddleware");
+
 
 // @desc Get all certificates by user ID
 // @route GET /api/certificates/user/:userId
 // @access Public or Protected (depends on your setup)
-router.get('/user/:userId', async (req, res) => {
+router.get('/user/:userId', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
 
